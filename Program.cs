@@ -13,17 +13,32 @@ namespace MathematicalModeling
         {
             //Console.WriteLine("Введите размер квадратной матрицы: ");
             //int size = Convert.ToInt32(Console.ReadLine());
-            TransportTask transportTask = new TransportTask(3, 3);
+            /*
+            NorthwestCorner northwestCorner = new NorthwestCorner(3,3);
             do
             {
-                transportTask.DoItemInVector();
-            } while (!transportTask.TestVector());
-            transportTask.DoItemMatrix();
-            transportTask.ShowInputMatrix();
-            transportTask.TaskSolution();
-            transportTask.ShowExitMatrix();
-            transportTask.CountCost();
-            transportTask.ShowCost();
+                northwestCorner.DoItemInVector();
+            } while (!northwestCorner.TestVector());
+            northwestCorner.DoItemMatrix();
+            northwestCorner.ShowInputMatrix();
+            northwestCorner.TaskSolution();
+            northwestCorner.ShowExitMatrix();
+            northwestCorner.CountCost();
+            northwestCorner.ShowCost();
+            */
+
+            MinimumElement minimumElement = new MinimumElement(3, 3);
+            do
+            {
+                minimumElement.DoItemInVector();
+            } while (!minimumElement.TestVector());
+            minimumElement.DoItemMatrix();
+            minimumElement.ShowInputMatrix();
+            minimumElement.TaskSolution();
+
+
+
+
             Console.ReadKey();
         }
     }

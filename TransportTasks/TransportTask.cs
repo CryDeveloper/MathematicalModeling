@@ -8,11 +8,12 @@ namespace MathematicalModeling.TransportTasks
 {
     internal class TransportTask
     {
-        int countRowMatrix, countColumnMatrix; //кол-во строк и столбцов в матрице
-        int[] mVector, nVector; //для значений M и N векторов
-        int[,] inputMatrix, exitMatrix; //для значений матрицы
-        int cost = 0;
-        Random randomCount = new Random();
+        protected int countRowMatrix, countColumnMatrix; //кол-во строк и столбцов в матрице
+        protected int[] mVector, nVector; //для значений M и N векторов
+        protected int[,] exitMatrix; //для значений матрицы
+        protected int cost = 0;
+        protected Random randomCount = new Random();
+        protected int[,] inputMatrix;
 
         public TransportTask(int countRowMatrix, int cointColumnMatrix)
         {
@@ -91,35 +92,6 @@ namespace MathematicalModeling.TransportTasks
             }
         }
 
-        public void TaskSolution()
-        {
-            for (int i = 0; i < exitMatrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < exitMatrix.GetLength(1); j++)
-                {
-                    if (nVector[j] > mVector[i] && mVector[i] != 0)
-                    {
-                        exitMatrix[i,j] = mVector[i];
-                        nVector[j] -= mVector[i];
-                        mVector[i] = 0;
-                        break;
-                    }
-                    else if (nVector[j] < mVector[i] && nVector[j] != 0)
-                    {
-                        exitMatrix[i, j] = nVector[i];
-                        mVector[j] -= nVector[i];
-                        nVector[i] = 0;
-                    }
-                    else if (nVector[j] == mVector[i])
-                    {
-                        exitMatrix[i, j] = nVector[i];
-                        nVector[i] = 0;
-                        mVector[i] = 0;
-                    }
-                }
-            }
-        }
-
         public void CountCost()
         {
             for (int i = 0; i < exitMatrix.GetLength(0); i++)
@@ -135,5 +107,7 @@ namespace MathematicalModeling.TransportTasks
         {
             Console.WriteLine("Стоимость перевозки = {0}", cost);
         }
+
+
     }
 }
