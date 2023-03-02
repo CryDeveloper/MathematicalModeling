@@ -33,9 +33,13 @@ namespace MathematicalModeling
                 minimumElement.DoItemInVector();
             } while (!minimumElement.TestVector());
             minimumElement.DoItemMatrix();
-            minimumElement.ShowInputMatrix();
+            Console.WriteLine("Исходная матрица");
+            minimumElement.ShowMatrix(minimumElement.InputMatrix);
             minimumElement.TaskSolution();
-
+            Console.WriteLine("Матрица с ценой: ");
+            minimumElement.ShowMatrix(minimumElement.ExitMatrix);
+            minimumElement.CountCost();
+            minimumElement.ShowCost();
 
 
 

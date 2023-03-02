@@ -10,10 +10,12 @@ namespace MathematicalModeling.TransportTasks
     {
         protected int countRowMatrix, countColumnMatrix; //кол-во строк и столбцов в матрице
         protected int[] mVector, nVector; //для значений M и N векторов
-        protected int[,] exitMatrix; //для значений матрицы
+        protected int[,] exitMatrix, inputMatrix; //для значений матрицы
         protected int cost = 0;
         protected Random randomCount = new Random();
-        protected int[,] inputMatrix;
+
+        public int[,] ExitMatrix { get => exitMatrix; set => exitMatrix = value; }
+        public int[,] InputMatrix { get => inputMatrix; set => inputMatrix = value; }
 
         public TransportTask(int countRowMatrix, int cointColumnMatrix)
         {
@@ -66,27 +68,13 @@ namespace MathematicalModeling.TransportTasks
             }
         }
 
-        public void ShowInputMatrix() //для вывода
+        public void ShowMatrix(int[,] matrix) //для вывода
         {
-            Console.WriteLine("Ваша матрица");
-            for (int i = 0; i < inputMatrix.GetLength(0); i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < inputMatrix.GetLength(1); j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    Console.Write($"{inputMatrix[i, j]} ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        public void ShowExitMatrix() //для вывода
-        {
-            Console.WriteLine("Ваша матрица с ценой: ");
-            for (int i = 0; i < exitMatrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < exitMatrix.GetLength(1); j++)
-                {
-                    Console.Write($"{exitMatrix[i, j]} ");
+                    Console.Write($"{matrix[i, j]} ");
                 }
                 Console.WriteLine();
             }
