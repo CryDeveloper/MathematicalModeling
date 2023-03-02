@@ -27,7 +27,7 @@ namespace MathematicalModeling
             northwestCorner.ShowCost();
             */
 
-            MinimumElement minimumElement = new MinimumElement(3, 3);
+            MinimumElement minimumElement = new MinimumElement(3, 4);
             do
             {
                 minimumElement.DoItemInVector();

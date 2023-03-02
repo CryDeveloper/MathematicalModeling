@@ -12,11 +12,15 @@ namespace MathematicalModeling.TransportTasks
         {
         }
 
+        /*Функция для создания ценовой матрицы*/
         public void TaskSolution()
         {
             int row, column;
+            /*Условие пробежки по исходной матрице
+             *Задача решается, пока значения в обоих векторых не приравниваются к 0*/
             while (nVector.Sum()!=0 && mVector.Sum() != 0)
             {
+                //сперва ищем минимальное значение в исходнике
                 FindMinimumInInputMatrix(out row, out column);
                 if (nVector[column] > mVector[row] && mVector[row] != 0)
                 {
@@ -36,15 +40,10 @@ namespace MathematicalModeling.TransportTasks
                     nVector[column] = 0;
                     mVector[row] = 0;
                 }
-                ////inputMatrix[row, column] = 0;
-                //Console.WriteLine("Исходная матрица");
-                //ShowMatrix(inputMatrix);
-                //Console.WriteLine("Матрица с ценой: ");
-                //ShowMatrix(exitMatrix);
             }
         }
 
-        int FindMaximumInMatrix(int[,] matrix )
+        int FindMaximumInMatrix(int[,] matrix ) //нахождение максимального элемента матрицы
         {
             int maximum = matrix[0,0];
             foreach (int element in matrix)
@@ -57,14 +56,22 @@ namespace MathematicalModeling.TransportTasks
             return maximum;
         }
 
+        //нахождение минимального нужного значения из исходной матрицы
         public void FindMinimumInInputMatrix(out int row, out int column)
         {
-            row = 0; column = 0;
+            row = 0; column = 0; //костыль шоб не ругалось на out
+            /*присваиваем для первого минимума самое большое значение в матрице 
+             *нужно чтобы условие выполнялось корректно и значения, которые будут равны заранее установленному минимуму
+             *проверялись также, как и остальные*/
             int minimum = FindMaximumInMatrix(inputMatrix);
             for (int i = 0; i < inputMatrix.GetLength(0); i++)
             {
                 for (int j = 0; j < inputMatrix.GetLength(1); j++)
                 {
+                    /*Нужный минимальный элемент должен быть:
+                    1: меньше известного до этого минимума
+                    2: в матрице с ценой там, где значения исходной матрицы не использвовались должен быть 0
+                    3: значения векторов на этом элементе исходника должны быть > 0*/
                     if (minimum >= inputMatrix[i, j] && exitMatrix[i, j] == 0 && !(mVector[i] == 0 || nVector[j] == 0))
                     {
                         minimum = inputMatrix[i, j];
