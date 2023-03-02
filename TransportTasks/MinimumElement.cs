@@ -32,8 +32,8 @@ namespace MathematicalModeling.TransportTasks
                 }
                 else if (nVector[column] == mVector[row])
                 {
-                    exitMatrix[row, column] = nVector[row];
-                    nVector[row] = 0;
+                    exitMatrix[row, column] = nVector[column];
+                    nVector[column] = 0;
                     mVector[row] = 0;
                 }
                 ////inputMatrix[row, column] = 0;
