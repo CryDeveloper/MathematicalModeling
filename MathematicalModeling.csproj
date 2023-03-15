@@ -47,6 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransportTasks\MinimumElement.cs" />
     <Compile Include="TransportTasks\NorthwestCorner.cs" />
+    <Compile Include="TransportTasks\SimplexMethod.cs" />
     <Compile Include="TransportTasks\TransportTask.cs" />
   </ItemGroup>
   <ItemGroup>

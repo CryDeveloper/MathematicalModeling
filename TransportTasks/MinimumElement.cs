@@ -4,6 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//MinimumElement minimumElement = new MinimumElement(3, 3);
+//do
+//{
+//    minimumElement.DoItemInVector();
+//} while (!minimumElement.TestVector());
+//minimumElement.DoItemMatrix(1,10);
+//Console.WriteLine("Исходная матрица");
+//minimumElement.ShowMatrix(minimumElement.InputMatrix);
+//minimumElement.TaskSolution();
+//Console.WriteLine("Матрица с ценой: ");
+//minimumElement.ShowMatrix(minimumElement.ExitMatrix);
+//minimumElement.CountCost();
+//minimumElement.ShowCost();
+
 namespace MathematicalModeling.TransportTasks
 {
     internal class MinimumElement : TransportTask
