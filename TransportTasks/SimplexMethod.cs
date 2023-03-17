@@ -8,15 +8,22 @@ namespace MathematicalModeling.TransportTasks
 {
     internal class SimplexMethod
     {
-        int[,] inputMatrix = { { 4, 1, 1, 0, 8 }, { 1, -1, 0, -1, -3 }, { 3, 4, 0, 0, 0 } };
-        int countRow, countColumn;
-        int[] scanf(string stroke, int lenght)
+        /*{ { 4, 1, 1, 0, 8 }, { 1, -1, 0, -1, -3 }, { 3, 4, 0, 0, 0 } }*/
+        double[,] inputMatrix = { 
+                                { 10,3,-1,0,0,0,30 },
+                                { 10,3,-1,0,0,0,30 },
+                                { 10,3,-1,0,0,0,30 },
+                                { 10,3,-1,0,0,0,30 },
+                                { 10,3,-1,0,0,0,30 }};
+        int countRow, countColumn, permissiveColumn, permissiveRow;
+        double valueFunction;
+        double[] scanf(string stroke, int lenght) //чтение строки в массив
         {
             string[] listCount = stroke.Split(' ');
-            int[] array = new int[lenght];
+            double[] array = new double[lenght];
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = Convert.ToInt32(listCount[i]);
+                array[i] = Convert.ToDouble(listCount[i]);
             }
             return array;
         }
@@ -26,47 +33,103 @@ namespace MathematicalModeling.TransportTasks
             countRow = row;
             countColumn = column;
             //GenerateMatrix();
-            DoTask();
         }
-        void GenerateMatrix()
+        void GenerateMatrix() //для ввода матрицы пользователем
         {
-            inputMatrix = new int[countRow, countColumn];
+            inputMatrix = new double[countRow, countColumn];
             for (int i = 0; i < inputMatrix.GetLength(0); i++)
             {
                 string inputString = Console.ReadLine();
-                int[] stroke = scanf(inputString, countColumn);
+                double[] stroke = scanf(inputString, countColumn);
                 for (int j = 0; j < inputMatrix.GetLength(1); j++)
                 {
                     inputMatrix[i, j] = stroke[j];
                 }
             }
         }
-        void DoTask()
+
+        bool ItOptimalSolution ()
         {
-            int maxElement = 0; //по житому
-            for (int i = 0; i < inputMatrix.GetLength(1); i++)
-            {
-                if (inputMatrix[countRow-1, i] > inputMatrix[countRow-1, maxElement])
-                {
-                    maxElement = i;
-                }
-            }
-
-            int minElement = 0;
-            for (int i = 0; i < inputMatrix.GetLength(0)-1; i++)
-            {
-                int count = inputMatrix[i, countColumn - 1] / inputMatrix[i, maxElement];
-                if (count < (inputMatrix[minElement, countColumn - 1] / inputMatrix[minElement, maxElement]) && count > 0)
-                {
-                    minElement = i;
-                }
-            }
-
+            bool itOptimalSolution = true;
             for (int j = 0; j < inputMatrix.GetLength(1); j++)
             {
-                inputMatrix[minElement, j] /= inputMatrix[minElement, maxElement];
+                if (inputMatrix[countRow-1, j] > 0)
+                {
+                    itOptimalSolution = false;
+                    break;
+                }
+            }
+            return itOptimalSolution;
+        }
+        void FindPermissiveElement()
+        {
+            permissiveColumn = 0;
+            /*Нахождение в каком столбце будет разрешающий элемент*/
+            for (int i = 0; i < inputMatrix.GetLength(1) - 1; i++)
+            {
+                if (inputMatrix[countRow - 1, i] > inputMatrix[countRow - 1, permissiveColumn])
+                {
+                    permissiveColumn = i;
+                }
+            }
+            permissiveRow = 0;
+            /*Нахождение в какой строке разрешающий элемент*/
+            for (int i = 0; i < inputMatrix.GetLength(0) - 1; i++)
+            {
+                double count = inputMatrix[i, countColumn - 1] / inputMatrix[i, permissiveColumn];
+                if (count < (inputMatrix[permissiveRow, countColumn - 1] / inputMatrix[permissiveRow, permissiveColumn]) && count > 0)
+                {
+                    permissiveRow = i;
+                }
+            }
+        }
+
+        void ChangeMatrixByGaus ()
+        {
+            FindPermissiveElement();
+            /*Приведение строки с разрешающим элементом к значению = 1*/
+            double permissiveElement = inputMatrix[permissiveRow, permissiveColumn];
+            for (int j = 0; j < inputMatrix.GetLength(1); j++)
+            {
+                inputMatrix[permissiveRow, j] /= permissiveElement;
             }
 
+            /*Преобразование матрицы*/
+            for (int i = 0; i < inputMatrix.GetLength(0); i++)
+            {
+                if (i == permissiveRow) continue;
+                double divider;
+                if (inputMatrix[i, permissiveColumn] < 0)
+                {
+                    divider = inputMatrix[i, permissiveColumn];
+                }
+                else
+                {
+                    divider = inputMatrix[i, permissiveColumn] * (-1);
+                }
+                for (int j = 0; j < inputMatrix.GetLength(1); j++)
+                {
+                    double a = inputMatrix[permissiveRow, j];
+                    inputMatrix[i, j] = inputMatrix[permissiveRow, j] * divider + inputMatrix[i, j];
+                }
+            }
+        }
+
+
+
+        public void DoTask()
+        {
+            if(!ItOptimalSolution())
+            {
+                do
+                {
+                    ChangeMatrixByGaus();
+                } while (!ItOptimalSolution());
+            }
+            valueFunction = inputMatrix[countRow - 1, countColumn - 1];
+            Console.WriteLine("Значение целевой функции = {0}", valueFunction);
+            
+            
         }
     }
 }

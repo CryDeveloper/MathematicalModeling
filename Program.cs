@@ -13,8 +13,8 @@ namespace MathematicalModeling
         static void Main(string[] args)
         {
             
-            int row = 3;
-            int collumn = 5;
+            int row = 5;
+            int collumn = 7;
             Console.WriteLine("Введите первую матрицу симплекс-метода");
             SimplexMethod zad = new SimplexMethod(row, collumn);
 
