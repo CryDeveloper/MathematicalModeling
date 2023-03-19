@@ -9,12 +9,13 @@ namespace MathematicalModeling.TransportTasks
     internal class SimplexMethod
     {
         /*{ { 4, 1, 1, 0, 8 }, { 1, -1, 0, -1, -3 }, { 3, 4, 0, 0, 0 } }*/
-        double[,] inputMatrix = { 
-                                { 10,3,-1,0,0,0,30 },
-                                { 10,3,-1,0,0,0,30 },
-                                { 10,3,-1,0,0,0,30 },
-                                { 10,3,-1,0,0,0,30 },
-                                { 10,3,-1,0,0,0,30 }};
+        //{ 
+        //                        { 10,3,-1,0,0,0,30 },
+        //                        { -1,1,01,1,0,0,5 },
+        //                        { 0,1,0,0,-1,0,2 },
+        //                        { 1,1,0,0,0,1,10 },
+        //                        { 1,3,0,0,0,0,0 }};
+        double[,] inputMatrix;
         int countRow, countColumn, permissiveColumn, permissiveRow;
         double valueFunction;
         double[] scanf(string stroke, int lenght) //чтение строки в массив
@@ -32,7 +33,7 @@ namespace MathematicalModeling.TransportTasks
         {
             countRow = row;
             countColumn = column;
-            //GenerateMatrix();
+            GenerateMatrix();
         }
         void GenerateMatrix() //для ввода матрицы пользователем
         {
@@ -114,9 +115,6 @@ namespace MathematicalModeling.TransportTasks
                 }
             }
         }
-
-
-
         public void DoTask()
         {
             if(!ItOptimalSolution())
@@ -127,7 +125,7 @@ namespace MathematicalModeling.TransportTasks
                 } while (!ItOptimalSolution());
             }
             valueFunction = inputMatrix[countRow - 1, countColumn - 1];
-            Console.WriteLine("Значение целевой функции = {0}", valueFunction);
+            Console.WriteLine("Значение целевой функции = {0}", valueFunction*(-1));
             
             
         }
