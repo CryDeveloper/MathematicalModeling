@@ -13,6 +13,10 @@ namespace MathematicalModeling
         //{ 4 2 0 1 0 20 },
         //{ 4 8 0 0 1 40 },
         //{ 12 15 0 0 0 0 }
+//6 6 1 0 0 36
+//4 2 0 1 0 20
+//4 8 0 0 1 40
+//12 15 0 0 0 0
 static void Main(string[] args)
         {
             

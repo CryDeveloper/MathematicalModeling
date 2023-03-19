@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MathematicalModeling.TransportTasks
 {
@@ -11,7 +12,7 @@ namespace MathematicalModeling.TransportTasks
         /*{ { 4, 1, 1, 0, 8 }, { 1, -1, 0, -1, -3 }, { 3, 4, 0, 0, 0 } }*/
         //{ 
         //                        { 10,3,-1,0,0,0,30 },
-        //                        { -1,1,01,1,0,0,5 },
+        //                        { -1,1,0,1,0,0,5 },
         //                        { 0,1,0,0,-1,0,2 },
         //                        { 1,1,0,0,0,1,10 },
         //                        { 1,3,0,0,0,0,0 }};
@@ -100,7 +101,7 @@ namespace MathematicalModeling.TransportTasks
             {
                 if (i == permissiveRow) continue;
                 double divider;
-                if (inputMatrix[i, permissiveColumn] < 0)
+                if (inputMatrix[i, permissiveColumn] < 0 && inputMatrix[i, permissiveColumn] != - 1)
                 {
                     divider = inputMatrix[i, permissiveColumn];
                 }
@@ -111,6 +112,7 @@ namespace MathematicalModeling.TransportTasks
                 for (int j = 0; j < inputMatrix.GetLength(1); j++)
                 {
                     double a = inputMatrix[permissiveRow, j];
+                    double b = inputMatrix[i, j];
                     inputMatrix[i, j] = inputMatrix[permissiveRow, j] * divider + inputMatrix[i, j];
                 }
             }
@@ -124,8 +126,8 @@ namespace MathematicalModeling.TransportTasks
                     ChangeMatrixByGaus();
                 } while (!ItOptimalSolution());
             }
-            valueFunction = inputMatrix[countRow - 1, countColumn - 1];
-            Console.WriteLine("Значение целевой функции = {0}", valueFunction*(-1));
+            valueFunction = inputMatrix[countRow - 1, countColumn - 1] * (-1);
+            Console.WriteLine("Значение целевой функции = {0}", valueFunction);
             
             
         }
