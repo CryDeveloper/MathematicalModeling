@@ -5,6 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+//int row = 4;
+//int collumn = 6;
+//Console.WriteLine("Введите первую матрицу симплекс-метода");
+//SimplexMethod zad = new SimplexMethod(row, collumn);
+//zad.DoTask();
+
 namespace MathematicalModeling.TransportTasks
 {
     internal class SimplexMethod
