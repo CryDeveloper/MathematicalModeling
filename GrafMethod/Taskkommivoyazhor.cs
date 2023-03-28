@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathematicalModeling.GrafMethod
 {
+
     internal class Taskkommivoyazhor
     {
 
@@ -83,11 +84,6 @@ namespace MathematicalModeling.GrafMethod
                     /*если просмотренный элемент больше выбранного
                      И массив пути не содержит выбранное
                     и просмотренный элемент > 0*/
-                    int a = inputMatrix[numRow, idMinimalTime];
-                    int b = inputMatrix[numRow, j];
-                    bool c1 = inputMatrix[numRow, idMinimalTime] > inputMatrix[numRow, j];
-                    bool c2 = route.Contains(idMinimalTime);
-                    bool c3 = inputMatrix[numRow, j] != 0;
                     if ((inputMatrix[numRow, idMinimalTime] > inputMatrix[numRow, j]) && 
                         !(route.Contains(j)) && (inputMatrix[numRow, j] != 0))
                     {

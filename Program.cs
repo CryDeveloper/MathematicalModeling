@@ -13,11 +13,10 @@ namespace MathematicalModeling
         
 static void Main(string[] args)
         {
-            Taskkommivoyazhor task = new Taskkommivoyazhor(5, 5);
-            task.DoItemMatrix(25);
-            task.ShowMatrix();
-            task.DoTask();
-
+            CriticalWay task = new CriticalWay(5);
+            Console.WriteLine("Исходная таблица: ");
+            CommonClass<int>.ShowTable(task.Table);
+            task.FindWays();
             Console.ReadKey();
         }
     }
