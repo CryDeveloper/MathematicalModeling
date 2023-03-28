@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathematicalModeling;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,17 +66,16 @@ namespace MathematicalModeling.GrafMethod
 
             //ввести k цикл, который будет содержать начальное значение j из 0 строки
             //определить сколько путей из 0 точки 
-            int countDotInRow = 1;
-            for (int g = 0; g <= countDotInRow; g++)
+            for (int k = 0; k < table.GetLength(0) - 1; k++)
             {
-                for (int k = 1; k < countDot; k++)
+                List<int> way = new List<int>();
+                way.Add(0);
+                int g = 0;
+                do
                 {
-                    countDotInRow = CountNotNullElemetInRow(k + 1);
-                    List<int> way = new List<int>();
-                    way.Add(0);
-                    for (int i = 0; i < table.GetLength(0) - 1; i++)
+                    for (int j = k; j < table.GetLength(1); j++)
                     {
-                        for (int j = k; j < table.GetLength(1); j++)
+                        for (int i = 0; i < table.GetLength(1)-1; i++)
                         {
                             if (!way.Contains(j) && table[i, j] != 0)
                             {
@@ -85,20 +85,27 @@ namespace MathematicalModeling.GrafMethod
                         }
                     }
                     CommonClass<int>.ShowCollect(way);
-                }
+                    g++;
+                } while (g <= CountNotNullElemetInRow(k));
+
             }
+            
         }
     }
 }
 
-//for (int i = table.GetLength(0); i != 5; i--)
+//int countDotInRow = 1;
+//for (int g = 0; g <= countDotInRow; g++)
 //{
-//    for (int j = table.GetLength(1); j != 1; j--)
+//    for (int k = 1; k < countDot; k++)
 //    {
-//        if (!way.Contains(j))
+//        countDotInRow = CountNotNullElemetInRow(k + 1);
+//        List<int> way = new List<int>();
+//        way.Add(0);
+//        for (int i = 0; i < table.GetLength(0) - 1; i++)
 //        {
-//            way.Add(j);
-//            break;
+//            
 //        }
+//        CommonClass<int>.ShowCollect(way);
 //    }
 //}
