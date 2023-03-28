@@ -66,27 +66,17 @@ namespace MathematicalModeling.GrafMethod
 
             //ввести k цикл, который будет содержать начальное значение j из 0 строки
             //определить сколько путей из 0 точки 
+            do
+            {
+
+                g++;
+            } while (g <= CountNotNullElemetInRow(1));
             for (int k = 0; k < table.GetLength(0) - 1; k++)
             {
                 List<int> way = new List<int>();
                 way.Add(0);
                 int g = 0;
-                do
-                {
-                    for (int j = k; j < table.GetLength(1); j++)
-                    {
-                        for (int i = 0; i < table.GetLength(1)-1; i++)
-                        {
-                            if (!way.Contains(j) && table[i, j] != 0)
-                            {
-                                way.Add(j);
-                                break;
-                            }
-                        }
-                    }
-                    CommonClass<int>.ShowCollect(way);
-                    g++;
-                } while (g <= CountNotNullElemetInRow(k));
+                
 
             }
             
@@ -104,7 +94,11 @@ namespace MathematicalModeling.GrafMethod
 //        way.Add(0);
 //        for (int i = 0; i < table.GetLength(0) - 1; i++)
 //        {
-//            
+//            if (!way.Contains(j) && table[i, j] != 0)
+                //{
+                //    way.Add(j);
+                //    break;
+                //}
 //        }
 //        CommonClass<int>.ShowCollect(way);
 //    }
