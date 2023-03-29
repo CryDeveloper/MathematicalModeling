@@ -35,7 +35,7 @@ internal class CriticalWay
         /// <returns>int[,]</returns>
         public int[,] DoRandomTable()
         {
-            int[,] matrix = new int[countDot, countDot];
+            int[,] matrix = new int[countDot, countDot-1];
             for (int i = 0; i < matrix.GetLength(0)-1; i++)
             {
                 for (int j = 1+i; j < matrix.GetLength(1); j++) 
@@ -47,58 +47,55 @@ internal class CriticalWay
             return matrix;
         }
 
-        //int CountNotNullElemetInRow(int numberRow)
-        //{
-        //    int count = 0;
-        //    for (int j = 1; j < table.GetLength(1); j++)
-        //        {
-        //            if (table[numberRow, j] != 0)
-        //            {
-        //                count++;
-        //            }
-        //        }
-        //    return count;
-        //}
-        List<int> CountNotNullElemetInRow(int numberRow)
+        int CountNotNullElemetInRow(int numberRow)
         {
-            List<int> count = new List<int>();
+            int count = 0;
             for (int j = 1; j < table.GetLength(1); j++)
             {
                 if (table[numberRow, j] != 0)
                 {
-                    count.Add(j);
+                    count++;
                 }
             }
             return count;
         }
-
-        public void FindWay(int i)
-        {
-            List<int> way = new List<int>();
-            way.Add(0);
-            do
-            {
-                for (int j = i + 1; j < table.GetLength(1); j++)
-                {
-                    //добавить игнор элем-в одинакового пути
-                    if (!way.Contains(j) && table[i, j] != 0)
-                    {
-                        way.Add(j);
-                        i = j;
-                        break;
-                    }
-                }
-            } while (i < table.GetLength(0) - 1);
-            CommonClass<int>.ShowCollect(way);
-        }
+        //List<int> CountNotNullElemetInRow(int numberRow)
+        //{
+        //    List<int> count = new List<int>();
+        //    for (int j = 1; j < table.GetLength(1); j++)
+        //    {
+        //        if (table[numberRow, j] != 0)
+        //        {
+        //            count.Add(j);
+        //        }
+        //    }
+        //    return count;
+        //}
 
         public void FindWays()
         {
-            int j = 0;
-            List<int> g = CountNotNullElemetInRow(0);
-            for (int i = 0; i < length; i++)
+            int countDotInRow = 1;
+            for (int g = 0; g <= countDotInRow; g++)
             {
-
+                for (int k = 1; k < countDot; k++)
+                {
+                    countDotInRow = CountNotNullElemetInRow(k + 1);
+                    List<int> way = new List<int>();
+                    way.Add(0);
+                    for (int i = 0; i < table.GetLength(0) - 1; i++)
+                    {
+                        for (int j = 0; i < table.GetLength(1); i++)
+                        {
+                            if (!way.Contains(j) && table[i, j] != 0)
+                            {
+                                way.Add(j);
+                                break;
+                            }
+                        }
+                        
+                    }
+                    CommonClass<int>.ShowCollect(way);
+                }
             }
         }
 
