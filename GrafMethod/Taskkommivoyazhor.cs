@@ -58,7 +58,11 @@ namespace MathematicalModeling.GrafMethod
                 Console.WriteLine();
             }
         }
-
+        /// <summary>
+        /// Нахождение пути от определенной первой точки
+        /// </summary>
+        /// <param name="numRow"></param>
+        /// <returns></returns>
         int?[] FindRoute(int numRow)
         {
             int?[] route = new int?[inputMatrix.GetLength(1)+1];
@@ -96,7 +100,11 @@ namespace MathematicalModeling.GrafMethod
             route[route.Length - 1] = route[0];
             return route;
         }
-
+        /// <summary>
+        /// Нахождение значения целевой функции
+        /// </summary>
+        /// <param name="numRow">строка в которой ищем</param>
+        /// <returns></returns>
         int CountFunctionOnRoute(int numRow)
         {
             int?[] route = FindRoute(numRow);

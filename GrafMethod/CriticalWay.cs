@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace MathematicalModeling.GrafMethod
 {
-    internal class CriticalWay
+    //{{ 0, 0, 3, 0, 0 },
+    //                    { 0, 0, 1, 3, 2 },
+    //                    { 0, 0, 0, 3, 3 },
+    //                    { 0, 0, 0, 0, 3 },
+    //                    { 0, 0, 0, 0, 0}};
+internal class CriticalWay
     {
-        int[,] table = {{ 0, 1, 4, 2, 0 },
-                        { 0, 0, 1, 3, 2 },
-                        { 0, 0, 0, 3, 3 },
-                        { 0, 0, 0, 0, 3 },
-                        { 0, 0, 0, 0, 0}};
+        int[,] table = {{ 0, 1, 3, 0},
+                        { 0, 0, 1, 3},
+                        { 0, 0, 0, 3},
+                        { 0, 0, 0, 0}};
         int countDot;
         Random random = new Random();
         List<List<int>> listWay = new List<List<int>>();
@@ -25,7 +29,10 @@ namespace MathematicalModeling.GrafMethod
         }
 
         public int[,] Table { get => table; set => table = value; }
-
+        /// <summary>
+        /// Генерация матрицы для метода критического пути
+        /// </summary>
+        /// <returns>int[,]</returns>
         public int[,] DoRandomTable()
         {
             int[,] matrix = new int[countDot, countDot];
@@ -34,30 +41,68 @@ namespace MathematicalModeling.GrafMethod
                 for (int j = 1+i; j < matrix.GetLength(1); j++) 
                 {
                     if (i == j) continue;
-                    //if (matrix[j,i] != 0) continue; //какой должна быть исходная матрица?
                     matrix[i,j] = random.Next(0, 5);
                 }
             }
             return matrix;
         }
 
-        int CountNotNullElemetInRow(int numberRow)
+        //int CountNotNullElemetInRow(int numberRow)
+        //{
+        //    int count = 0;
+        //    for (int j = 1; j < table.GetLength(1); j++)
+        //        {
+        //            if (table[numberRow, j] != 0)
+        //            {
+        //                count++;
+        //            }
+        //        }
+        //    return count;
+        //}
+        List<int> CountNotNullElemetInRow(int numberRow)
         {
-            int count = 0;
-            for (int i = numberRow; i < table.GetLength(0); i++)
+            List<int> count = new List<int>();
+            for (int j = 1; j < table.GetLength(1); j++)
             {
-                for (int j = 1; j < table.GetLength(1); j++)
+                if (table[numberRow, j] != 0)
                 {
-                    if (table[i, j] != 0)
-                    {
-                        count++;
-                    }
+                    count.Add(j);
                 }
             }
             return count;
         }
 
+        public void FindWay(int i)
+        {
+            List<int> way = new List<int>();
+            way.Add(0);
+            do
+            {
+                for (int j = i + 1; j < table.GetLength(1); j++)
+                {
+                    //добавить игнор элем-в одинакового пути
+                    if (!way.Contains(j) && table[i, j] != 0)
+                    {
+                        way.Add(j);
+                        i = j;
+                        break;
+                    }
+                }
+            } while (i < table.GetLength(0) - 1);
+            CommonClass<int>.ShowCollect(way);
+        }
+
         public void FindWays()
+        {
+            int j = 0;
+            List<int> g = CountNotNullElemetInRow(0);
+            for (int i = 0; i < length; i++)
+            {
+
+            }
+        }
+
+        public void FindWays1()
         {
             if (table == null)
             {
@@ -66,19 +111,53 @@ namespace MathematicalModeling.GrafMethod
 
             //ввести k цикл, который будет содержать начальное значение j из 0 строки
             //определить сколько путей из 0 точки 
-            do
+            
+            for (int k = 1; k < table.GetLength(0); k++)
             {
-
-                g++;
-            } while (g <= CountNotNullElemetInRow(1));
-            for (int k = 0; k < table.GetLength(0) - 1; k++)
-            {
-                List<int> way = new List<int>();
-                way.Add(0);
                 int g = 0;
-                
-
+                do
+                {
+                    int a = CountNotNullElemetInRow(k);
+                    List<int> way = new List<int>();
+                    way.Add(0);
+                    for (int i = 0; i < table.GetLength(0)-1; i++)
+                    {
+                        for (int j = k; j < table.GetLength(1); j++)
+                        {
+                            bool flag = true;
+                            if(listWay.Count > 0)
+                            {
+                                foreach (List<int> item in listWay)
+                                {
+                                    List<int> b = item;
+                                    if (j > k && j == item[j])
+                                    {
+                                        flag = false;
+                                        break;
+                                    }
+                                    //for (int f = j; f < countDot; f++)
+                                    //{
+                                    //    if (f > k && item[f] == j)
+                                    //    {
+                                    //        flag = false;
+                                    //    }
+                                    //}
+                                }
+                                
+                            }                            
+                            if (flag && !way.Contains(j) && table[i, j] != 0 )
+                            {
+                                way.Add(j);
+                                break;
+                            }
+                        }
+                    }
+                    listWay.Add(way);
+                    CommonClass<int>.ShowCollect(way);
+                    g++;
+                } while (g <= CountNotNullElemetInRow(k));
             }
+           
             
         }
     }
