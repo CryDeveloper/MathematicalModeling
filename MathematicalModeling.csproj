@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CommonClass.cs" />
     <Compile Include="GrafMethod\CriticalWay.cs" />
+    <Compile Include="GrafMethod\MultustepProcces.cs" />
     <Compile Include="GrafMethod\Taskkommivoyazhor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,12 +11,14 @@ namespace MathematicalModeling
     internal class Program
     {
         
-static void Main(string[] args)
+        static void Main(string[] args)
         {
-            CriticalWay task = new CriticalWay(5);
-            Console.WriteLine("Исходная таблица: ");
-            CommonClass<int>.ShowTable(task.Table);
-            task.FindWays();
+            //CriticalWay task = new CriticalWay(5);
+            //Console.WriteLine("Исходная таблица: ");
+            //CommonClass<int>.ShowTable(task.Table);
+            //task.FindWays();
+            MultustepProcces task = new MultustepProcces();
+
             Console.ReadKey();
         }
     }
