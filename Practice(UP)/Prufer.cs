@@ -7,6 +7,14 @@ using System.Threading.Tasks;
 
 namespace MathematicalModeling.Practice_UP_
 {
+    //Prufer codeTask = new Prufer("ResourceFile/inputCode.txt");
+    //codeTask.DoCodeTask();
+    //codeTask.DoCodePruferOutputFile("ResourceFile/resultCode.txt");
+
+    //Prufer decodeTask = new Prufer("ResourceFile/resultCode.txt");
+    //decodeTask.DoDecodeTask();
+    //decodeTask.DoWoodOutputFile("ResourceFile/resultDecode.txt");
+
     internal class Prufer
     {
         string pathInputFile;

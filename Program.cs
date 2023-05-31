@@ -15,13 +15,16 @@ namespace MathematicalModeling
 
         static void Main(string[] args)
         {
-            Prufer codeTask = new Prufer("ResourceFile/inputCode.txt");
-            codeTask.DoCodeTask();
-            codeTask.DoCodePruferOutputFile("ResourceFile/resultCode.txt");
+            //Prufer codeTask = new Prufer("ResourceFile/inputCode.txt");
+            //codeTask.DoCodeTask();
+            //codeTask.DoCodePruferOutputFile("ResourceFile/resultCode.txt");
 
-            Prufer decodeTask = new Prufer("ResourceFile/resultCode.txt");
-            decodeTask.DoDecodeTask();
-            decodeTask.DoWoodOutputFile("ResourceFile/resultDecode.txt");
+            //Prufer decodeTask = new Prufer("ResourceFile/resultCode.txt");
+            //decodeTask.DoDecodeTask();
+            //decodeTask.DoWoodOutputFile("ResourceFile/resultDecode.txt");
+
+            Predator_prey task = new Predator_prey(100, 20, 0.05, 0.00001, 0.001, 0.1, 0.0001);
+            task.DoTask();
 
             Console.WriteLine("Ready.");
             Console.ReadKey();
