@@ -23,8 +23,10 @@ namespace MathematicalModeling
             //decodeTask.DoDecodeTask();
             //decodeTask.DoWoodOutputFile("ResourceFile/resultDecode.txt");
 
-            Predator_prey task = new Predator_prey(100, 20, 0.05, 0.00001, 0.001, 0.1, 0.0001);
-            task.DoTask();
+            //Predator_prey task = new Predator_prey(100, 20, 0.05, 0.00001, 0.001, 0.1, 0.0001);
+            //task.DoTask();
+
+            montekarlo montekarlo = new montekarlo();
 
             Console.WriteLine("Ready.");
             Console.ReadKey();
